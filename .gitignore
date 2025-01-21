@@ -15,3 +15,7 @@ dist
 wandb/
 __pycache__
 .vscode/
+
+
+# zyw
+zyw_tests
