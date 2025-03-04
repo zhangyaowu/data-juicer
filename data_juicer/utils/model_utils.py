@@ -68,6 +68,12 @@ BACKUP_MODEL_LINKS = {
     'FastSAM-x.pt',
 }
 
+TORCH_DTYPE_MAPPING = {
+    'fp32': torch.float32,
+    'fp16': torch.float16,
+    'bf16': torch.bfloat16,
+}
+
 
 def get_backup_model_link(model_name):
     for pattern, url in BACKUP_MODEL_LINKS.items():
@@ -291,8 +297,12 @@ def prepare_diffusion_model(pretrained_model_name_or_path, diffusion_type,
     """
     AUTOINSTALL.check(['torch', 'transformers'])
 
-    if 'device' in model_params:
-        model_params['device_map'] = model_params.pop('device')
+    device = model_params.pop('device', None)
+    if not device:
+        model_params['device_map'] = 'balanced'
+    if 'torch_dtype' in model_params:
+        model_params['torch_dtype'] = TORCH_DTYPE_MAPPING[
+            model_params['torch_dtype']]
 
     diffusion_type_to_pipeline = {
         'image2image': diffusers.AutoPipelineForImage2Image,
@@ -309,6 +319,8 @@ def prepare_diffusion_model(pretrained_model_name_or_path, diffusion_type,
     pipeline = diffusion_type_to_pipeline[diffusion_type]
     model = pipeline.from_pretrained(pretrained_model_name_or_path,
                                      **model_params)
+    if device:
+        model = model.to(device)
 
     return model
 
@@ -341,7 +353,7 @@ def prepare_huggingface_model(pretrained_model_name_or_path,
                               pipe_task='text-generation',
                               **model_params):
     """
-    Prepare and load a HuggingFace model with the correspoding processor.
+    Prepare and load a HuggingFace model with the corresponding processor.
 
     :param pretrained_model_name_or_path: model name or path
     :param return_model: return model or not
@@ -509,7 +521,7 @@ def prepare_sentencepiece_for_lang(lang,
                                    name_pattern='{}.sp.model',
                                    **model_params):
     """
-    Prepare and load a sentencepiece model for specific langauge.
+    Prepare and load a sentencepiece model for specific language.
 
     :param lang: language to render model name
     :param name_pattern: pattern to render the model name
@@ -622,7 +634,7 @@ def prepare_video_blip_model(pretrained_model_name_or_path,
                              return_model=True,
                              **model_params):
     """
-    Prepare and load a video-clip model with the correspoding processor.
+    Prepare and load a video-clip model with the corresponding processor.
 
     :param pretrained_model_name_or_path: model name or path
     :param return_model: return model or not
@@ -763,7 +775,7 @@ def prepare_video_blip_model(pretrained_model_name_or_path,
 
 def prepare_vllm_model(pretrained_model_name_or_path, **model_params):
     """
-    Prepare and load a HuggingFace model with the correspoding processor.
+    Prepare and load a HuggingFace model with the corresponding processor.
 
     :param pretrained_model_name_or_path: model name or path
     :param model_params: LLM initialization parameters.
@@ -852,7 +864,8 @@ MODEL_FUNCTION_MAPPING = {
 }
 
 _MODELS_WITHOUT_FILE_LOCK = {
-    'kenlm', 'nltk', 'recognizeAnything', 'sentencepiece', 'spacy'
+    'fasttext', 'fastsam', 'kenlm', 'nltk', 'recognizeAnything',
+    'sentencepiece', 'spacy'
 }
 
 

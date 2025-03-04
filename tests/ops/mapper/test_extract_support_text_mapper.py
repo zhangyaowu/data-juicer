@@ -1,17 +1,12 @@
 import unittest
-import json
 
 from loguru import logger
 
 from data_juicer.core.data import NestedDataset as Dataset
 from data_juicer.ops.mapper.extract_support_text_mapper import ExtractSupportTextMapper
-from data_juicer.utils.unittest_utils import (SKIPPED_TESTS,
-                                              DataJuicerTestCaseBase)
+from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 from data_juicer.utils.constant import Fields, MetaKeys
 
-# Skip tests for this OP.
-# These tests have been tested locally.
-@SKIPPED_TESTS.register_module()
 class ExtractSupportTextMapperTest(DataJuicerTestCaseBase):
 
 
@@ -67,7 +62,7 @@ class ExtractSupportTextMapperTest(DataJuicerTestCaseBase):
         self.assertNotEqual(sample[Fields.meta][MetaKeys.support_text], '')
 
     def test(self):
-        # before runing this test, set below environment variables:
+        # before running this test, set below environment variables:
         # export OPENAI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1/
         # export OPENAI_API_KEY=your_dashscope_key
         self._run_op('qwen2.5-72b-instruct')

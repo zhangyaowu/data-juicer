@@ -47,7 +47,7 @@ class GenerateQAFromTextMapper(Mapper):
         """
         Initialization method.
 
-        :param hf_model: Hugginface model ID.
+        :param hf_model: Huggingface model ID.
         :param max_num: The max num of returned QA sample for each text.
             Not limit if it is None.
         :param output_pattern: Regular expression pattern to extract
@@ -85,6 +85,9 @@ class GenerateQAFromTextMapper(Mapper):
         model_params = model_params or {}
         sampling_params = sampling_params or {}
 
+        sampling_params = update_sampling_params(sampling_params, hf_model,
+                                                 self.enable_vllm)
+
         if enable_vllm:
             assert torch.cuda.device_count() >= 1, 'must be executed in CUDA'
             # cannot initialize vllm replicas on different GPUs
@@ -106,10 +109,6 @@ class GenerateQAFromTextMapper(Mapper):
                 return_pipe=True,
                 **model_params)
             self.sampling_params = sampling_params
-
-        self.sampling_params = update_sampling_params(sampling_params,
-                                                      hf_model,
-                                                      self.enable_vllm)
 
     def parse_output(self, raw_output):
         logger.debug(raw_output)

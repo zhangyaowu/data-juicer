@@ -34,3 +34,5 @@ Pillow
 fastapi[standard]>=0.100
 httpx
 wordcloud
+jsonlines
+ray==2.40.0

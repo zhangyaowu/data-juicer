@@ -1,17 +1,12 @@
 import unittest
-import json
 
 from loguru import logger
 
 from data_juicer.core.data import NestedDataset as Dataset
 from data_juicer.ops.mapper.extract_entity_relation_mapper import ExtractEntityRelationMapper
-from data_juicer.utils.unittest_utils import (SKIPPED_TESTS,
-                                              DataJuicerTestCaseBase)
+from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 from data_juicer.utils.constant import Fields, MetaKeys
 
-# Skip tests for this OP.
-# These tests have been tested locally.
-@SKIPPED_TESTS.register_module()
 class ExtractEntityRelationMapperTest(DataJuicerTestCaseBase):
 
 
@@ -64,7 +59,7 @@ class ExtractEntityRelationMapperTest(DataJuicerTestCaseBase):
         logger.info(f"relations: {sample[Fields.meta][MetaKeys.relation]}")
 
     def test_default(self):
-        # before runing this test, set below environment variables:
+        # before running this test, set below environment variables:
         # export OPENAI_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1/
         # export OPENAI_API_KEY=your_dashscope_key
         op = ExtractEntityRelationMapper(api_model='qwen2.5-72b-instruct')

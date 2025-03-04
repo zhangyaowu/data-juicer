@@ -68,7 +68,7 @@ class GenerateQAFromExamplesMapper(Mapper):
         """
         Initialization method.
 
-        :param hf_model: Hugginface model ID.
+        :param hf_model: Huggingface model ID.
         :param seed_file: Path to the seed file in chatml format.
         :param example_num: The number of selected examples.
             Randomly select N examples from "seed_file" and
@@ -118,6 +118,9 @@ class GenerateQAFromExamplesMapper(Mapper):
         model_params = model_params or {}
         sampling_params = sampling_params or {}
 
+        sampling_params = update_sampling_params(sampling_params, hf_model,
+                                                 self.enable_vllm)
+
         if enable_vllm:
             assert torch.cuda.device_count() >= 1, 'must be executed in CUDA'
             # cannot initialize vllm replicas on different GPUs
@@ -139,10 +142,6 @@ class GenerateQAFromExamplesMapper(Mapper):
                 return_pipe=True,
                 **model_params)
             self.sampling_params = sampling_params
-
-        self.sampling_params = update_sampling_params(sampling_params,
-                                                      hf_model,
-                                                      self.enable_vllm)
 
         self.seed_qa_samples = self._load_seed_qa_samples()
         if len(self.seed_qa_samples) == 0:

@@ -29,7 +29,7 @@ class Fields(object):
 
 class BatchMetaKeys(object):
     entity_attribute = 'entity_attribute'
-    most_relavant_entities = 'most_relavant_entities'
+    most_relevant_entities = 'most_relevant_entities'
 
 
 class MetaKeys(object):
@@ -76,7 +76,7 @@ class MetaKeys(object):
     attributes = 'attributes'
     # # the extracted attribute descriptions
     attribute_descriptions = 'attribute_descriptions'
-    # # extract from raw datas for support the attribute
+    # # extract from raw data for support the attribute
     attribute_support_texts = 'attribute_support_texts'
     # # the nickname relationship
     nickname = 'nickname'
@@ -129,9 +129,20 @@ class StatsKeysMeta(type):
             cls._accessed_by[caller_class].add(stat_key)
         return stat_key
 
-    def get_access_log(cls, dj_cfg=None):
+    def get_access_log(cls, dj_cfg=None, dataset=None):
         if cls._accessed_by:
             return cls._accessed_by
+        elif dj_cfg and dataset:
+            tmp_dj_cfg = copy.deepcopy(dj_cfg)
+            tmp_dj_cfg.use_cache = False
+            tmp_dj_cfg.use_checkpoint = False
+
+            from data_juicer.core import Analyzer
+            tmp_analyzer = Analyzer(tmp_dj_cfg)
+
+            dataset = dataset.take(1)
+            # do not overwrite the true analysis results
+            tmp_analyzer.run(dataset=dataset, skip_export=True)
         elif dj_cfg:
             tmp_dj_cfg = copy.deepcopy(dj_cfg)
             # the access has been skipped due to the use of cache
@@ -174,9 +185,6 @@ class StatsKeysMeta(type):
                 tmp_dj_cfg.dataset_path = tmp_f_name
                 tmp_dj_cfg.use_cache = False
                 tmp_dj_cfg.use_checkpoint = False
-
-                from data_juicer.config import get_init_configs
-                tmp_dj_cfg = get_init_configs(tmp_dj_cfg)
 
                 from data_juicer.core import Analyzer
                 tmp_analyzer = Analyzer(tmp_dj_cfg)

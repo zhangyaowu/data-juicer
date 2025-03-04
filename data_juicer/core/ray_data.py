@@ -5,6 +5,8 @@ from functools import partial
 from typing import Any, Dict, List, Literal, Optional, Union
 
 import pyarrow
+import ray.data as rd
+import ray.data.read_api as ds
 from loguru import logger
 
 from data_juicer import cuda_device_count
@@ -12,11 +14,7 @@ from data_juicer.core.data import DJDataset
 from data_juicer.ops import Deduplicator, Filter, Mapper
 from data_juicer.ops.base_op import TAGGING_OPS
 from data_juicer.utils.constant import Fields
-from data_juicer.utils.lazy_loader import LazyLoader
 from data_juicer.utils.process_utils import calculate_np
-
-rd = LazyLoader('rd', 'ray.data')
-ds = LazyLoader('ds', 'ray.data.read_api')
 
 
 def get_abs_path(path, dataset_dir):
@@ -115,8 +113,8 @@ class RayDataset(DJDataset):
 
             def process_batch_arrow(table: pyarrow.Table):
                 new_column_data = [{} for _ in range(len(table))]
-                new_talbe = table.append_column(Fields.meta, [new_column_data])
-                return new_talbe
+                new_table = table.append_column(Fields.meta, [new_column_data])
+                return new_table
 
             self.data = self.data.map_batches(process_batch_arrow,
                                               batch_format='pyarrow')

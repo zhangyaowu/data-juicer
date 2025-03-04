@@ -1,14 +1,13 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+# Test only on 7:00 morning of Friday each week in Beijing time, which is 23:00 of Thursday in UTC time.
 
-name: unittest
+name: unittest-regression
 
 on:
   workflow_dispatch:
-  pull_request:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 23 * * 4'
 
 permissions:
   contents: read
@@ -44,12 +43,26 @@ jobs:
     - name: Run unittest standalone
       working-directory: dj-${{ github.run_id }}/.github/workflows/docker
       run: |
-        docker compose exec ray-head python tests/run.py --tag standalone
+        docker compose exec -e OPENAI_BASE_URL=${{ secrets.OPENAI_BASE_URL }} -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} ray-head python tests/run.py --tag standalone --mode regression
+
+    - name: Upload coverage report of standalone
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage_report_standalone
+        include-hidden-files: true
+        path: dj-${{ github.run_id }}/coverage_report_standalone
 
     - name: Run unittest ray
       working-directory: dj-${{ github.run_id }}/.github/workflows/docker
       run: |
-        docker compose exec ray-head python tests/run.py --tag ray
+        docker compose exec ray-head python tests/run.py --tag ray --mode regression
+
+    - name: Upload coverage report of ray
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage_report_ray
+        include-hidden-files: true
+        path: dj-${{ github.run_id }}/coverage_report_ray
 
     - name: Remove docker compose
       working-directory: dj-${{ github.run_id }}/.github/workflows/docker

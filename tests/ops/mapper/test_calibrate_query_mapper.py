@@ -3,13 +3,8 @@ import unittest
 from loguru import logger
 
 from data_juicer.ops.mapper.calibrate_query_mapper import CalibrateQueryMapper
-from data_juicer.utils.unittest_utils import (SKIPPED_TESTS,
-                                              DataJuicerTestCaseBase)
+from data_juicer.utils.unittest_utils import DataJuicerTestCaseBase
 
-
-# Skip tests for this OP because the API call is not configured yet.
-# These tests have been tested locally.
-@SKIPPED_TESTS.register_module()
 class CalibrateQueryMapperTest(DataJuicerTestCaseBase):
 
     def _run_op(self, api_model, response_path=None):
@@ -68,7 +63,7 @@ class CalibrateQueryMapperTest(DataJuicerTestCaseBase):
             self.assertNotEqual(result['response'], '')
 
     def test(self):
-        # before runing this test, set below environment variables:
+        # before running this test, set below environment variables:
         # export OPENAI_API_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
         # export OPENAI_API_KEY=your_key
         self._run_op('qwen2.5-72b-instruct')
