@@ -5,13 +5,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>data_juicer.ops.mapper.extract_entity_relation_mapper &mdash; data_juicer 1.1.0 documentation</title>
+  <title>data_juicer.ops.mapper.extract_entity_relation_mapper &mdash; data_juicer 1.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
 
   
-      <script src="../../../../_static/documentation_options.js?v=fc837d61"></script>
-      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/documentation_options.js?v=ca842793"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -39,16 +39,16 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.core.html">data_juicer.core package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.html">data_juicer.ops package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.filter.html">data_juicer.ops.filter package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.mapper.html">data_juicer.ops.mapper package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.selector.html">data_juicer.ops.selector package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.common.html">data_juicer.ops.common package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.analysis.html">data_juicer.analysis package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.config.html">data_juicer.config package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.format.html">data_juicer.format package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.core.html">data_juicer.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.html">data_juicer.ops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.filter.html">data_juicer.ops.filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.mapper.html">data_juicer.ops.mapper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.deduplicator.html">data_juicer.ops.deduplicator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.selector.html">data_juicer.ops.selector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.ops.common.html">data_juicer.ops.common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.analysis.html">data_juicer.analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.config.html">data_juicer.config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../data_juicer.format.html">data_juicer.format</a></li>
 </ul>
 
         </div>
@@ -101,7 +101,7 @@
 
 <span class="c1"># TODO: LLM-based inference.</span>
 <div class="viewcode-block" id="ExtractEntityRelationMapper">
-<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.extract_entity_relation_mapper.ExtractEntityRelationMapper">[docs]</a>
+<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractEntityRelationMapper">[docs]</a>
 <span class="nd">@TAGGING_OPS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="nd">@OPERATORS</span><span class="o">.</span><span class="n">register_module</span><span class="p">(</span><span class="n">OP_NAME</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExtractEntityRelationMapper</span><span class="p">(</span><span class="n">Mapper</span><span class="p">):</span>
@@ -154,7 +154,7 @@
 <span class="s2">(&quot;entity&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Taylor&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;person&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Taylor is portrayed with authoritarian certainty and shows a moment of reverence towards a device, indicating a change in perspective.&quot;)</span><span class="si">{record_delimiter}</span>
 <span class="s2">(&quot;entity&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Jordan&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;person&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Jordan shares a commitment to discovery and has a significant interaction with Taylor regarding a device.&quot;)</span><span class="si">{record_delimiter}</span>
 <span class="s2">(&quot;entity&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Cruz&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;person&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Cruz is associated with a vision of control and order, influencing the dynamics among other characters.&quot;)</span><span class="si">{record_delimiter}</span>
-<span class="s2">(&quot;entity&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;The Device&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;technology&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;The Device is central to the story, with potential game-changing implications, and is revered by Taylor.&quot;)</span><span class="si">{record_delimiter}</span>
+<span class="s2">(&quot;entity&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;The Device&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;technology&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;The Device is central to the story, with potential game-changing implications, and is reversed by Taylor.&quot;)</span><span class="si">{record_delimiter}</span>
 <span class="s2">(&quot;relationship&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Alex&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Taylor&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Alex is affected by Taylor&#39;s authoritarian certainty and observes changes in Taylor&#39;s attitude towards the device.&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;power dynamics, perspective shift&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">7)</span><span class="si">{record_delimiter}</span>
 <span class="s2">(&quot;relationship&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Alex&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Jordan&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Alex and Jordan share a commitment to discovery, which contrasts with Cruz&#39;s vision.&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;shared goals, rebellion&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">6)</span><span class="si">{record_delimiter}</span>
 <span class="s2">(&quot;relationship&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Taylor&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Jordan&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;Taylor and Jordan interact directly regarding the device, leading to a moment of mutual respect and an uneasy truce.&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">&quot;conflict resolution, mutual respect&quot;</span><span class="si">{tuple_delimiter}</span><span class="s2">8)</span><span class="si">{record_delimiter}</span>
@@ -229,7 +229,7 @@
     <span class="n">DEFAULT_RELATION_PATTERN</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\(&quot;relationship&quot;(.*?)\)&#39;</span>
 
 <div class="viewcode-block" id="ExtractEntityRelationMapper.__init__">
-<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.extract_entity_relation_mapper.ExtractEntityRelationMapper.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractEntityRelationMapper.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">api_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;gpt-4o&#39;</span><span class="p">,</span>
                  <span class="n">entity_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -315,7 +315,7 @@
 
 
 <div class="viewcode-block" id="ExtractEntityRelationMapper.parse_output">
-<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.extract_entity_relation_mapper.ExtractEntityRelationMapper.parse_output">[docs]</a>
+<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractEntityRelationMapper.parse_output">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">parse_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_output</span><span class="p">):</span>
         <span class="n">entities</span><span class="p">,</span> <span class="n">relations</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 
@@ -375,13 +375,13 @@
 
 
 <div class="viewcode-block" id="ExtractEntityRelationMapper.add_message">
-<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.extract_entity_relation_mapper.ExtractEntityRelationMapper.add_message">[docs]</a>
+<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractEntityRelationMapper.add_message">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">,</span> <span class="n">role</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">messages</span> <span class="o">+</span> <span class="p">[{</span><span class="s1">&#39;role&#39;</span><span class="p">:</span> <span class="n">role</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="n">content</span><span class="p">}]</span></div>
 
 
 <div class="viewcode-block" id="ExtractEntityRelationMapper.light_rag_extraction">
-<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.extract_entity_relation_mapper.ExtractEntityRelationMapper.light_rag_extraction">[docs]</a>
+<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractEntityRelationMapper.light_rag_extraction">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">light_rag_extraction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messages</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">client</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model_key</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">)</span>
 
@@ -408,7 +408,7 @@
 
 
 <div class="viewcode-block" id="ExtractEntityRelationMapper.process_single">
-<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.extract_entity_relation_mapper.ExtractEntityRelationMapper.process_single">[docs]</a>
+<a class="viewcode-back" href="../../../../data_juicer.ops.mapper.html#data_juicer.ops.mapper.ExtractEntityRelationMapper.process_single">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">process_single</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="c1"># check if it&#39;s generated already</span>
